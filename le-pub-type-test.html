@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Pub — logotype type test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Serif:ital@0;1&family=Italiana&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Yeseva+One&family=Tangerine:wght@400;700&family=Berkshire+Swash&family=Pinyon+Script&family=Instrument+Sans:wght@400..700&family=Familjen+Grotesk:wght@400..700&family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Archivo:wght@400..700&family=Space+Grotesk:wght@400..700&family=Hanken+Grotesk:wght@400..700&display=swap">
+<style>
+  :root{
+    --bg:#1E2B22;
+    --card:#25362A;
+    --cream:#EFE9DC;
+    --muted:#AEB6A3;
+    --brass:#C4A24D;
+    --line:rgba(239,233,220,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:56px 24px 90px;}
+  header h1{font-size:26px;font-weight:600;margin:0 0 10px;letter-spacing:-0.01em;}
+  header p{font-size:15px;color:var(--muted);margin:0 0 40px;max-width:60ch;line-height:1.65;}
+
+  .sticky-preview{position:sticky;top:0;z-index:10;background:var(--bg);padding:16px 0;border-bottom:1px solid var(--line);}
+
+  .preview-card{
+    position:relative;
+    border-radius:16px;
+    padding:72px 20px 56px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:200px;
+    border:1px solid var(--line);
+    transition:background-color .15s ease;
+  }
+  .preview-card[data-bg="green"]{background:var(--card);}
+  .preview-card[data-bg="cream"]{background:#F3ECD9;}
+  .preview-card[data-bg="charcoal"]{background:#141414;}
+
+  .specimen{display:flex;align-items:baseline;justify-content:center;flex-wrap:wrap;text-align:center;line-height:1;}
+  .ink-light #le, .ink-light #pub{color:#F2EDE1;}
+  .ink-dark #le, .ink-dark #pub{color:#2B2118;}
+
+  .bg-toggle{position:absolute;top:14px;right:14px;display:flex;gap:6px;}
+  .bg-toggle button{
+    background:transparent;border:1px solid rgba(239,233,220,.3);color:var(--cream);
+    width:22px;height:22px;border-radius:50%;cursor:pointer;padding:0;
+  }
+  .preview-card[data-bg="cream"] .bg-toggle button{border-color:rgba(43,33,24,.3);color:#2B2118;}
+  .bg-toggle button[data-active="true"]{border-color:var(--brass);border-width:2px;}
+
+  .caption{margin-top:24px;font-size:13px;color:var(--muted);text-align:center;}
+
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 32px;}
+  .presets button{
+    background:transparent;border:1px solid rgba(239,233,220,.22);color:var(--cream);
+    padding:9px 16px;border-radius:999px;font-size:13px;cursor:pointer;
+  }
+  .presets button:hover{border-color:var(--brass);color:var(--brass);}
+
+  .controls{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;
+    display:grid;grid-template-columns:1fr 1fr;gap:8px 28px;
+  }
+  .controls h2{font-size:14px;font-weight:600;margin:0 0 16px;color:var(--cream);}
+  .field{margin-bottom:16px;}
+  .field label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .field label span.val{color:var(--cream);}
+  select{
+    width:100%;background:var(--bg);color:var(--cream);border:1px solid rgba(239,233,220,.22);
+    border-radius:8px;padding:9px 10px;font-size:14px;
+  }
+  input[type=range]{width:100%;accent-color:var(--brass);}
+  .check-row{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
+  .check-row input{accent-color:var(--brass);}
+  .check-row label{font-size:13px;color:var(--muted);}
+  .shared-row{grid-column:1 / -1;border-top:1px solid var(--line);padding-top:20px;margin-top:4px;}
+
+  .actions{display:flex;align-items:center;gap:14px;margin-top:24px;}
+  .copy-btn{
+    background:var(--brass);color:#241C0E;border:none;border-radius:8px;padding:11px 20px;
+    font-size:14px;font-weight:600;cursor:pointer;
+  }
+  .copy-btn:hover{opacity:.9;}
+  .copy-feedback{font-size:13px;color:var(--brass);opacity:0;transition:opacity .2s ease;}
+  .copy-feedback.show{opacity:1;}
+
+  footer{margin-top:40px;font-size:13px;color:var(--muted);line-height:1.6;max-width:65ch;}
+
+  @media(max-width:640px){
+    .controls, .shared-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Le Pub — logotype type test</h1>
+    <p>A working comparison of type pairings for the wordmark. Try the presets, then adjust weight, tracking, and italics directly — whatever you land on, note it down or copy it at the bottom so we can compare notes.</p>
+  </header>
+
+<div class="sticky-preview">
+    <div class="preview-card ink-light" id="previewCard" data-bg="green">
+      <div class="bg-toggle">
+        <button type="button" data-bg-choice="green" data-active="true" aria-label="Bottle green background"></button>
+        <button type="button" data-bg-choice="cream" aria-label="Cream label background"></button>
+        <button type="button" data-bg-choice="charcoal" aria-label="Charcoal signage background"></button>
+      </div>
+      <div class="specimen">
+        <span id="le">Le</span><span id="gapSpacer">&nbsp;</span><span id="pub">Pub</span>
+      </div>
+    </div>
+    <p class="caption" id="captionText"></p>
+  </div>
+
+  <div class="presets" id="presets"></div>
+
+  <div class="controls">
+    <div>
+      <h2>"Le"</h2>
+      <div class="field">
+        <label for="leFont">Typeface</label>
+        <select id="leFont">
+          <option value="'Fraunces',serif" data-opsz="1" data-weight="1">Fraunces</option>
+          <option value="'Instrument Serif',serif" data-opsz="0" data-weight="0">Instrument Serif</option>
+          <option value="'Italiana',serif" data-opsz="0" data-weight="0">Italiana</option>
+          <option value="'Cormorant Garamond',serif" data-opsz="0" data-weight="1">Cormorant Garamond</option>
+          <option value="'Playfair Display',serif" data-opsz="0" data-weight="1">Playfair Display</option>
+          <option value="'Newsreader',serif" data-opsz="1" data-weight="1">Newsreader</option>
+          <option value="'Yeseva One',serif" data-opsz="0" data-weight="0">Yeseva One (more flourish)</option>
+          <option value="'Tangerine',serif" data-opsz="0" data-weight="1">Tangerine (script, most flourish)</option>
+          <option value="'Berkshire Swash',serif" data-opsz="0" data-weight="0">Berkshire Swash (more flourish)</option>
+          <option value="'Pinyon Script',serif" data-opsz="0" data-weight="0">Pinyon Script (wedding-invite style)</option>
+        </select>
+      </div>
+      <div class="check-row">
+        <input type="checkbox" id="leItalic" checked>
+        <label for="leItalic">Italic</label>
+      </div>
+      <div class="field">
+        <label for="leOpsz">Flourish (optical size)<span class="val" id="leOpszVal">72</span></label>
+        <input type="range" id="leOpsz" min="9" max="144" value="72" step="1">
+      </div>
+      <div class="field">
+        <label for="leWeight">Weight<span class="val" id="leWeightVal">500</span></label>
+        <input type="range" id="leWeight" min="300" max="700" value="500" step="10">
+      </div>
+      <div class="field">
+        <label for="leTracking">Tracking<span class="val" id="leTrackingVal">0</span></label>
+        <input type="range" id="leTracking" min="-40" max="100" value="0" step="1">
+      </div>
+      <div class="field">
+        <label for="leSize">Size<span class="val" id="leSizeVal">72px</span></label>
+        <input type="range" id="leSize" min="20" max="200" value="72" step="1">
+      </div>
+      <div class="field">
+        <label for="leCase">Case</label>
+        <select id="leCase">
+          <option value="none">As typed</option>
+          <option value="uppercase">UPPERCASE</option>
+          <option value="lowercase">lowercase</option>
+          <option value="capitalize">Capitalize</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <h2>"Pub"</h2>
+      <div class="field">
+        <label for="pubFont">Typeface</label>
+        <select id="pubFont">
+          <option value="'Instrument Sans',sans-serif">Instrument Sans</option>
+          <option value="'Familjen Grotesk',sans-serif">Familjen Grotesk</option>
+          <option value="'Bricolage Grotesque',sans-serif">Bricolage Grotesque</option>
+          <option value="'Archivo',sans-serif">Archivo</option>
+          <option value="'Space Grotesk',sans-serif">Space Grotesk</option>
+          <option value="'Hanken Grotesk',sans-serif">Hanken Grotesk</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="pubWeight">Weight<span class="val" id="pubWeightVal">600</span></label>
+        <input type="range" id="pubWeight" min="400" max="800" value="600" step="10">
+      </div>
+      <div class="field">
+        <label for="pubTracking">Tracking<span class="val" id="pubTrackingVal">0</span></label>
+        <input type="range" id="pubTracking" min="-40" max="150" value="0" step="1">
+      </div>
+      <div class="field">
+        <label for="pubSize">Size<span class="val" id="pubSizeVal">72px</span></label>
+        <input type="range" id="pubSize" min="20" max="200" value="72" step="1">
+      </div>
+      <div class="field">
+        <label for="pubCase">Case</label>
+        <select id="pubCase">
+          <option value="none">As typed</option>
+          <option value="uppercase">UPPERCASE</option>
+          <option value="lowercase">lowercase</option>
+          <option value="capitalize">Capitalize</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="shared-row">
+      <div class="field" style="max-width:320px;">
+        <label for="gap">Word gap<span class="val" id="gapVal">16px</span></label>
+        <input type="range" id="gap" min="-24" max="64" value="16" step="1">
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="copy-btn" id="copyBtn">Copy this combination</button>
+    <span class="copy-feedback" id="copyFeedback">Copied</span>
+  </div>
+
+  <footer>
+    Sanvito Pro, Brandon Grotesque, ITC Avant Garde Gothic, and Tangier are all worth a look too — they're in the Adobe Fonts library rather than Google's, so they're not wired into the dropdowns here. This page only embeds free Google Fonts webfonts, since that's what loads for anyone opening the link without your Creative Cloud login. Worth pulling into your kit and testing directly in Illustrator alongside whatever wins this round.
+  </footer>
+</div>
+
+<script>
+  const leFontSel = document.getElementById('leFont');
+  const pubFontSel = document.getElementById('pubFont');
+  const leItalic = document.getElementById('leItalic');
+  const leOpsz = document.getElementById('leOpsz');
+  const leWeight = document.getElementById('leWeight');
+  const leTracking = document.getElementById('leTracking');
+  const pubWeight = document.getElementById('pubWeight');
+  const pubTracking = document.getElementById('pubTracking');
+  const gap = document.getElementById('gap');
+  const leSize = document.getElementById('leSize');
+  const pubSize = document.getElementById('pubSize');
+  const leCase = document.getElementById('leCase');
+  const pubCase = document.getElementById('pubCase');
+  const le = document.getElementById('le');
+  const pub = document.getElementById('pub');
+  const gapSpacer = document.getElementById('gapSpacer');
+  const previewCard = document.getElementById('previewCard');
+  const captionText = document.getElementById('captionText');
+
+  const controls = [leFontSel, pubFontSel, leItalic, leOpsz, leWeight, leTracking, pubWeight, pubTracking, gap, leSize, pubSize, leCase, pubCase];
+
+  function fontLabel(select){
+    return select.options[select.selectedIndex].text;
+  }
+
+  function update(){
+    const leOpt = leFontSel.options[leFontSel.selectedIndex];
+    const supportsOpsz = leOpt.dataset.opsz === '1';
+    const supportsWeight = leOpt.dataset.weight === '1';
+
+    le.style.fontFamily = leFontSel.value;
+    le.style.fontStyle = leItalic.checked ? 'italic' : 'normal';
+    le.style.fontWeight = supportsWeight ? leWeight.value : '400';
+    let variations = [];
+    if (supportsOpsz) variations.push("'opsz' " + leOpsz.value);
+    le.style.fontVariationSettings = variations.join(', ');
+    le.style.letterSpacing = (leTracking.value / 1000) + 'em';
+
+    pub.style.fontFamily = pubFontSel.value;
+    pub.style.fontWeight = pubWeight.value;
+    pub.style.letterSpacing = (pubTracking.value / 1000) + 'em';
+
+    gapSpacer.style.marginRight = gap.value + 'px';
+
+    le.style.fontSize = leSize.value + 'px';
+    pub.style.fontSize = pubSize.value + 'px';
+    le.style.textTransform = leCase.value;
+    pub.style.textTransform = pubCase.value;
+
+    leOpsz.disabled = !supportsOpsz;
+    leWeight.disabled = !supportsWeight;
+
+    document.getElementById('leOpszVal').textContent = leOpsz.value;
+    document.getElementById('leWeightVal').textContent = supportsWeight ? leWeight.value : '—';
+    document.getElementById('leTrackingVal').textContent = leTracking.value;
+    document.getElementById('pubWeightVal').textContent = pubWeight.value;
+    document.getElementById('pubTrackingVal').textContent = pubTracking.value;
+    document.getElementById('gapVal').textContent = gap.value + 'px';
+    document.getElementById('leSizeVal').textContent = leSize.value + 'px';
+    document.getElementById('pubSizeVal').textContent = pubSize.value + 'px';
+
+    captionText.textContent = fontLabel(leFontSel) + (leItalic.checked ? ' italic' : '') + '  /  ' + fontLabel(pubFontSel) + ' ' + pubWeight.value;
+  }
+
+  controls.forEach(el => el.addEventListener('input', update));
+
+  document.querySelectorAll('.bg-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const choice = btn.dataset.bgChoice;
+      previewCard.dataset.bg = choice;
+      previewCard.classList.toggle('ink-dark', choice === 'cream');
+      previewCard.classList.toggle('ink-light', choice !== 'cream');
+      document.querySelectorAll('.bg-toggle button').forEach(b => b.dataset.active = (b === btn) ? 'true' : 'false');
+    });
+  });
+
+  const presets = [
+    {label:'Fraunces + Instrument Sans', le:"'Fraunces',serif", italic:true, opsz:72, leW:500, leT:0, pub:"'Instrument Sans',sans-serif", pubW:600, pubT:0, gap:16},
+    {label:'Instrument Serif + Familjen Grotesk', le:"'Instrument Serif',serif", italic:true, opsz:72, leW:400, leT:0, pub:"'Familjen Grotesk',sans-serif", pubW:500, pubT:10, gap:18},
+    {label:'Italiana + Archivo', le:"'Italiana',serif", italic:false, opsz:72, leW:400, leT:20, pub:"'Archivo',sans-serif", pubW:700, pubT:20, gap:20},
+    {label:'Cormorant Garamond + Bricolage Grotesque', le:"'Cormorant Garamond',serif", italic:true, opsz:72, leW:600, leT:0, pub:"'Bricolage Grotesque',sans-serif", pubW:600, pubT:0, gap:14},
+    {label:'Playfair Display + Space Grotesk', le:"'Playfair Display',serif", italic:true, opsz:72, leW:600, leT:0, pub:"'Space Grotesk',sans-serif", pubW:500, pubT:10, gap:16},
+    {label:'Newsreader + Hanken Grotesk', le:"'Newsreader',serif", italic:true, opsz:60, leW:500, leT:0, pub:"'Hanken Grotesk',sans-serif", pubW:600, pubT:0, gap:16},
+    {label:'Yeseva One + Archivo', le:"'Yeseva One',serif", italic:false, opsz:72, leW:400, leT:0, pub:"'Archivo',sans-serif", pubW:700, pubT:20, gap:20},
+    {label:'Tangerine + Bricolage Grotesque', le:"'Tangerine',serif", italic:false, opsz:72, leW:700, leT:0, pub:"'Bricolage Grotesque',sans-serif", pubW:600, pubT:10, gap:14},
+    {label:'Pinyon Script + Instrument Sans', le:"'Pinyon Script',serif", italic:false, opsz:72, leW:400, leT:10, pub:"'Instrument Sans',sans-serif", pubW:600, pubT:30, gap:18}
+  ];
+
+  const presetsWrap = document.getElementById('presets');
+  presets.forEach(p => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = p.label;
+    btn.addEventListener('click', () => {
+      leFontSel.value = p.le;
+      leItalic.checked = p.italic;
+      leOpsz.value = p.opsz;
+      leWeight.value = p.leW;
+      leTracking.value = p.leT;
+      pubFontSel.value = p.pub;
+      pubWeight.value = p.pubW;
+      pubTracking.value = p.pubT;
+      gap.value = p.gap;
+      update();
+    });
+    presetsWrap.appendChild(btn);
+  });
+
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const summary = fontLabel(leFontSel) + (leItalic.checked ? ' italic' : '') +
+      ', weight ' + (leWeight.disabled ? 'n/a' : leWeight.value) +
+      ', tracking ' + leTracking.value +
+      ', size ' + leSize.value + 'px' +
+      (leCase.value !== 'none' ? ', ' + leCase.options[leCase.selectedIndex].text : '') +
+      '  /  ' +
+      fontLabel(pubFontSel) + ', weight ' + pubWeight.value +
+      ', tracking ' + pubTracking.value +
+      ', size ' + pubSize.value + 'px' +
+      (pubCase.value !== 'none' ? ', ' + pubCase.options[pubCase.selectedIndex].text : '') +
+      '  /  gap ' + gap.value + 'px';
+    const feedback = document.getElementById('copyFeedback');
+    navigator.clipboard.writeText(summary).then(() => {
+      feedback.classList.add('show');
+      setTimeout(() => feedback.classList.remove('show'), 1800);
+    }).catch(() => {
+      feedback.textContent = summary;
+      feedback.classList.add('show');
+    });
+  });
+
+  update();
+</script>
+</body>
+</html>
